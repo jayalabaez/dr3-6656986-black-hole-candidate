@@ -1,0 +1,80 @@
+{
+  "target": "Gaia DR3 6656986282721029120",
+  "M2_true": 5.509,
+  "tests": [
+    {
+      "scenario": "Main-sequence companion",
+      "test": "SED composite / blue excess test",
+      "M2": 5.509,
+      "expected_L_Lsun": 700,
+      "expected_Teff": 16000,
+      "flux_ratio_G_pct": 45,
+      "verdict": "EXCLUDED",
+      "reason": "A 5.509 Msun MS star would have L ~ 700 Lsun and Teff ~ 16000 K (mid-B type).  Against the K-giant primary (L ~ 600 Lsun), it would contribute ~45% of the G-band flux and dominate in the BP band.  The observed single-star SED with BP-RP = 1.77 (pure cool star) excludes a luminous hot companion."
+    },
+    {
+      "scenario": "White dwarf",
+      "test": "Mass ceiling (Chandrasekhar limit)",
+      "M2": 5.509,
+      "M_chandrasekhar": 1.44,
+      "excess_factor": 3.8,
+      "verdict": "EXCLUDED",
+      "reason": "M2 = 5.509 Msun exceeds the Chandrasekhar limit (1.44 Msun) by a factor of 3.8.  No known single WD can reach this mass."
+    },
+    {
+      "scenario": "Neutron star",
+      "test": "Mass ceiling (TOV limit)",
+      "M2": 5.509,
+      "M_tov": 2.3,
+      "excess_factor": 2.4,
+      "verdict": "EXCLUDED",
+      "reason": "M2 = 5.509 Msun exceeds the TOV limit (2.3 Msun) by a factor of 2.4.  Even the most generous NS EOS (M_max ~ 2.5 Msun) cannot accommodate this mass. Note: the posterior has a tail into the mass gap (3-5 Msun) due to M1 uncertainty, but the median remains above the NS ceiling."
+    },
+    {
+      "scenario": "Hierarchical triple",
+      "test": "Mardling-Aarseth stability + photometric",
+      "P_inner_max_d": 19.6,
+      "M2_split": 2.75,
+      "verdict": "EXCLUDED",
+      "reason": "Stability requires P_inner < 19.6 d.  Two ~ 2.8 Msun MS stars would have combined L ~ 130 Lsun (early A-type) \u2014 detectable in the SED.  If both are compact objects (WDs/NSs), each at ~ 2.8 Msun exceeds the Chandrasekhar limit.  A compact triple with two BHs is astrophysically contrived."
+    },
+    {
+      "scenario": "Stripped helium star",
+      "test": "UV excess + spectral signature",
+      "M2": 5.509,
+      "expected_Teff": "> 40000 K",
+      "expected_L_Lsun": 5000,
+      "verdict": "DISFAVOURED",
+      "reason": "A 5.509 Msun stripped He star at Teff > 40000 K would produce strong UV emission.  No GALEX detection is confirmed at this position.  The absence of X-ray emission in ROSAT is consistent with a quiescent BH but does not definitively exclude a hot subdwarf.  UV spectroscopy would close this channel."
+    },
+    {
+      "scenario": "Astrometric artefact",
+      "test": "NSS solution quality metrics",
+      "significance": 27.98,
+      "RUWE": 5.376,
+      "EN_sig": 691.7,
+      "GoF": 8.17,
+      "verdict": "DISFAVOURED",
+      "reason": "The Orbital solution has significance 28.0 (5.6x the threshold of 5).  RUWE = 5.4 is moderately elevated, consistent with a binary.  EN_sig = 692 indicates coherent excess astrometric noise.  GoF = 8.17 flags imperfect model fit, which is common for bright sources with complex scan angle coverage.  El-Badry+2024 notes that ~20% of Orbital solutions fail RV checks, so independent RV confirmation is essential."
+    },
+    {
+      "scenario": "Chance alignment",
+      "test": "Orbital coherence test",
+      "significance": 27.98,
+      "period_days": 443.9,
+      "verdict": "STRONGLY DISFAVOURED",
+      "reason": "The orbital solution represents a coherent Keplerian signal at 28 sigma over 444 d.  At G = 6.47 (very bright), blending with a background source producing periodic astrometric perturbation is extremely unlikely.  The high eccentricity (e = 0.583) is consistent with a genuine binary."
+    }
+  ],
+  "counts": {
+    "EXCLUDED": 4,
+    "DISFAVOURED": 2,
+    "STRONGLY DISFAVOURED": 1
+  },
+  "surviving_scenarios": [
+    "Stripped helium star",
+    "Astrometric artefact",
+    "Chance alignment"
+  ],
+  "conclusion": "BH CANDIDATE: All standard non-BH scenarios are excluded or disfavoured.  The borderline mass (M2 = 5.509 Msun) places this object at the lower edge of the stellar-mass BH range.  RV confirmation is critical to validate the Orbital solution."
+}

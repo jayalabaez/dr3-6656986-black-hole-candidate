@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this analysis, please cite it as below."
+title: "Dormant Black Hole Candidate Gaia DR3 6656986282721029120"
+authors:
+  - family-names: "Ayala"
+    given-names: "Joel"
+    orcid: ""
+date-released: "2025-01-01"
+version: "1.0.0"
+license: MIT
+repository-code: "https://github.com/jayalabaez/dr3-6656986-black-hole-candidate"
+keywords:
+  - black holes
+  - astrometric binaries
+  - Gaia DR3
+  - mass gap
+  - orbital solution
+  - dormant compact objects
+abstract: >-
+  Publication-ready analysis of Gaia DR3 6656986282721029120, a borderline
+  dormant black-hole candidate identified from the Gaia DR3 non-single-star
+  Orbital solution catalogue. The companion mass of 5.51 solar masses (true
+  mass from astrometric orbit) exceeds the neutron-star maximum by a factor
+  of 2.4 and lies at the lower boundary of the established stellar-mass
+  black-hole population.

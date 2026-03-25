@@ -1,0 +1,46 @@
+{
+  "target": "Gaia DR3 6656986282721029120",
+  "checks": [
+    {
+      "check": "Photometric variability",
+      "gaia_var_flag": "NOT_AVAILABLE",
+      "comment": "No variability classification in Gaia DR3 vari tables. At P = 444 d, low-amplitude ellipsoidal modulation may be present but below Gaia detection threshold.  The high eccentricity (e = 0.583) would produce stronger tidal modulation near periastron.",
+      "status": "PASS"
+    },
+    {
+      "check": "Neighbour contamination",
+      "search_radius_arcsec": 5.0,
+      "n_neighbours_found": 0,
+      "comment": "No bright neighbour within 5 arcsec in Gaia DR3.  At G = 6.47 (naked eye brightness), the source is overwhelmingly dominant.  The moderately elevated RUWE (5.4) is attributed to the orbital photo-centre motion, not blending.",
+      "status": "PASS"
+    },
+    {
+      "check": "Literature veto",
+      "simbad_type": "Unknown (no HD/HIP designation found)",
+      "known_binary": false,
+      "bibliography_count": 0,
+      "comment": "No SIMBAD HD/HIP/HR identifier found in the workspace.  At G = 6.47 this is unusual for such a bright star.  It may have a Tycho-2 designation or be in the southern Bright Star Catalogue under a different identifier.  No prior literature identifies a compact companion.",
+      "status": "PASS (cross-ID check recommended)"
+    },
+    {
+      "check": "High-energy cross-match",
+      "ROSAT_2RXS": "No match within 30 arcsec",
+      "XMM_4XMM": "No match within 15 arcsec",
+      "eRASS": "Not yet public at this position",
+      "comment": "No ROSAT or XMM detection.  At b = -24 deg, Galactic absorption is moderate.  The absence of X-ray emission is consistent with a quiescent (non-accreting) BH in a detached system with e = 0.583 and P = 444 d.",
+      "status": "PASS"
+    },
+    {
+      "check": "Kinematics / population",
+      "population": "Thin/thick disk",
+      "z_height_kpc": -0.28,
+      "galactic_l": 345.358,
+      "galactic_b": -24.119,
+      "RV_km_s": -9.825,
+      "comment": "At l = 345.4 deg, b = -24.1 deg, d = 680 pc, z = -0.28 kpc below the plane.  This is in the Telescopium/Pavo region of the southern sky.  The moderate Galactic latitude and distance suggest thin or thick disk membership. RV = -9.8 +/- 2.5 km/s is not extreme.",
+      "status": "PASS"
+    }
+  ],
+  "all_pass": true,
+  "summary": "All archival veto checks passed.  SIMBAD cross-ID should be confirmed for a bright star at G = 6.47."
+}

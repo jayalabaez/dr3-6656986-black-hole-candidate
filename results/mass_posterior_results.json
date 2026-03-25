@@ -1,0 +1,28 @@
+{
+  "solution_type": "Orbital",
+  "mass_type": "true (inclination resolved from astrometry)",
+  "M2_catalog": 5.509,
+  "M1_best": 9.179,
+  "M1_sigma": 3.0,
+  "parallax_mas": 1.4698,
+  "parallax_err_mas": 0.0883,
+  "period_d": 443.904,
+  "eccentricity": 0.583,
+  "MC_draws": 500000,
+  "MC_valid": 500000,
+  "M2_median": 5.33,
+  "M2_68ci": [
+    4.34,
+    6.56
+  ],
+  "M2_90ci": [
+    3.8,
+    7.5
+  ],
+  "P_above_5Msun_percent": 62.2,
+  "P_above_NS_percent": 100.0,
+  "P_above_3Msun_percent": 99.7,
+  "P_above_10Msun_percent": 0.1,
+  "P_mass_gap_percent": 37.6,
+  "semi_major_axis_AU": 2.79
+}

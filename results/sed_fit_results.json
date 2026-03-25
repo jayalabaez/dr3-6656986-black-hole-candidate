@@ -1,0 +1,38 @@
+{
+  "teff_gspphot": null,
+  "teff_colour": 4400,
+  "logg_gspphot": null,
+  "bp_rp_obs": 1.773,
+  "bp_rp_intrinsic": 1.45,
+  "E_BP_RP": 0.323,
+  "A_G": 0.6105,
+  "A_V": 0.7737,
+  "M_G_raw": -2.695,
+  "M_G_corrected": -3.305,
+  "L_Lsun": 2388.2,
+  "R_Rsun": 84.1,
+  "spectral_type_est": "K3-K4 III",
+  "chi2_red_uncorrected": 80.41,
+  "chi2_red_dereddened": 16.09,
+  "bands": [
+    "G",
+    "BP",
+    "RP",
+    "J",
+    "H",
+    "Ks",
+    "W1",
+    "W2"
+  ],
+  "residuals_sigma": [
+    -3.75,
+    -3.5,
+    -2.09,
+    2.6,
+    5.94,
+    4.44,
+    1.88,
+    -0.69
+  ],
+  "note": "Teff derived from (BP-RP) colour; GSP-Phot unavailable"
+}
