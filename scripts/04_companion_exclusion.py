@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-"""
-04_companion_exclusion.py — Luminous companion exclusion test for
-Gaia DR3 6656986282721029120.
+"""04_companion_exclusion.py — Luminous companion test for
+Gaia DR3 6656986282721029120 (HD 178734).
 
 At M2 = 5.51 Msun, a main-sequence companion would be a mid-B star
-with Teff ~ 16000 K and L ~ 700 Lsun.  The primary is a luminous
-K-type giant (L ~ 600 Lsun, Teff ~ 4400 K).  Unlike higher-mass
-BH candidates, the flux ratio is of order unity — the composite
-SED would show a clear blue + red component, not a single cool
-star.  The observed single-star SED provides the exclusion.
+with Teff ~ 15000 K and L ~ 1100 Lsun.  The primary is a luminous
+K-type giant (L ~ 2400 Lsun, Teff ~ 4400 K).  Despite the large
+primary luminosity, the hot companion would dominate in the blue
+bands.  The observed single-star SED disfavours this scenario.
 
 Outputs:
   results/companion_exclusion_results.json
@@ -33,8 +31,8 @@ sigma_sb = 5.670e-5
 # ─── primary properties ──────────────────────────────────────────────
 M1 = 9.179           # Msun
 TEFF_PRIMARY = 4400  # K (from BP-RP colour)
-L_PRIMARY = 600.0    # Lsun (approximate for K3 III at M_G ~ -2.7)
-M2_TRUE = 5.509      # Msun (true mass from Orbital solution)
+L_PRIMARY = 2388.0   # Lsun (from SED analysis, M_G = -3.3)
+M2_TRUE = 5.509      # Msun (derived mass from Orbital solution)
 
 FILTERS = {
     'G':  {'lam': 0.622, 'fzp': 3228.75},

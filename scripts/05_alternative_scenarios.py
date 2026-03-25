@@ -4,13 +4,13 @@
 for the dark companion in Gaia DR3 6656986282721029120.
 
 Tests seven scenarios:
-  1. Main-sequence star   -> EXCLUDED (SED composite test)
+  1. Main-sequence star   -> DISFAVOURED (blackbody SED test — not definitive)
   2. White dwarf          -> EXCLUDED (M2 > Chandrasekhar)
-  3. Neutron star         -> EXCLUDED (M2 > TOV limit)
-  4. Hierarchical triple  -> EXCLUDED (photometric + stability)
+  3. Neutron star         -> EXCLUDED (M2 > TOV limit, borderline at low M1)
+  4. Hierarchical triple  -> DISFAVOURED (photometric + stability)
   5. Stripped He star     -> DISFAVOURED (UV check needed)
-  6. Astrometric artefact -> DISFAVOURED (pending RV)
-  7. Chance alignment     -> STRONGLY DISFAVOURED
+  6. Astrometric artefact -> DISFAVOURED (pending RV; WDS visual double noted)
+  7. Chance alignment     -> DISFAVOURED (pending crowding analysis)
 
 Outputs:
   results/alternative_scenarios_results.json
@@ -21,7 +21,7 @@ import json, os
 # Constants
 M_CHANDRA = 1.44     # Msun
 M_TOV = 2.3          # Msun (conservative)
-M2 = 5.509           # Msun (true mass from Orbital)
+M2 = 5.509           # Msun (derived mass from Gaia NSS Orbital solution)
 M1 = 9.179           # Msun
 P_ORBIT = 443.90     # days
 ECC = 0.583
@@ -34,18 +34,20 @@ GOF = 8.17
 def test_ms_companion():
     return {
         'scenario': 'Main-sequence companion',
-        'test': 'SED composite / blue excess test',
+        'test': 'SED composite / blue excess test (blackbody)',
         'M2': M2,
         'expected_L_Lsun': 700,
         'expected_Teff': 16000,
         'flux_ratio_G_pct': 45,
-        'verdict': 'EXCLUDED',
+        'verdict': 'DISFAVOURED',
         'reason': (f'A {M2} Msun MS star would have L ~ 700 Lsun and '
                    f'Teff ~ 16000 K (mid-B type).  Against the K-giant '
-                   f'primary (L ~ 600 Lsun), it would contribute ~45% of '
+                   f'primary (L ~ 2400 Lsun), it would contribute ~30% of '
                    f'the G-band flux and dominate in the BP band.  The '
-                   f'observed single-star SED with BP-RP = 1.77 (pure '
-                   f'cool star) excludes a luminous hot companion.'),
+                   f'observed single-star SED with BP-RP = 1.77 disfavours '
+                   f'a luminous hot companion, but the test uses blackbody '
+                   f'models and saturated 2MASS photometry (quality DDD), '
+                   f'so definitive exclusion requires a stellar-atmosphere fit.'),
     }
 
 
@@ -75,8 +77,9 @@ def test_neutron_star():
                    f'by a factor of {M2/M_TOV:.1f}.  Even the most generous '
                    f'NS EOS (M_max ~ 2.5 Msun) cannot accommodate this mass. '
                    f'Note: the posterior has a tail into the mass gap '
-                   f'(3-5 Msun) due to M1 uncertainty, but the median '
-                   f'remains above the NS ceiling.'),
+                   f'(3-5 Msun) due to M1 uncertainty.  At the lowest '
+                   f'plausible M1 (~ 3 Msun), the companion mass drops '
+                   f'to ~ 3 Msun, making NS borderline.'),
     }
 
 
@@ -88,14 +91,15 @@ def test_hierarchical_triple():
         'test': 'Mardling-Aarseth stability + photometric',
         'P_inner_max_d': round(P_inner_max, 1),
         'M2_split': round(M_each, 2),
-        'verdict': 'EXCLUDED',
+        'verdict': 'DISFAVOURED',
         'reason': (f'Stability requires P_inner < {P_inner_max:.1f} d.  '
                    f'Two ~ {M_each:.1f} Msun MS stars would have combined '
-                   f'L ~ 130 Lsun (early A-type) — detectable in the SED.  '
+                   f'L ~ 130 Lsun (early A-type) — likely detectable in the SED, '
+                   f'though our blackbody test is not definitive.  '
                    f'If both are compact objects (WDs/NSs), each at '
                    f'~ {M_each:.1f} Msun exceeds the Chandrasekhar limit.  '
                    f'A compact triple with two BHs is astrophysically '
-                   f'contrived.'),
+                   f'contrived but not formally excluded.'),
     }
 
 
@@ -108,9 +112,10 @@ def test_stripped_star():
         'expected_L_Lsun': 5000,
         'verdict': 'DISFAVOURED',
         'reason': (f'A {M2} Msun stripped He star at Teff > 40000 K '
-                   f'would produce strong UV emission.  No GALEX '
-                   f'detection is confirmed at this position.  '
-                   f'The absence of X-ray emission in ROSAT is '
+                   f'would produce strong UV emission.  A GALEX source '
+                   f'(GALEX J191224.0-514820) exists at 0.9 arcsec offset, '
+                   f'but magnitudes are unavailable and the association is '
+                   f'uncertain.  The absence of X-ray emission in ROSAT is '
                    f'consistent with a quiescent BH but does not '
                    f'definitively exclude a hot subdwarf.  UV '
                    f'spectroscopy would close this channel.'),
@@ -120,7 +125,7 @@ def test_stripped_star():
 def test_astrometric_artefact():
     return {
         'scenario': 'Astrometric artefact',
-        'test': 'NSS solution quality metrics',
+        'test': 'NSS solution quality metrics + visual double check',
         'significance': SIG,
         'RUWE': RUWE,
         'EN_sig': EN_SIG,
@@ -132,7 +137,10 @@ def test_astrometric_artefact():
                    f'EN_sig = {EN_SIG:.0f} indicates coherent excess '
                    f'astrometric noise.  GoF = {GOF:.2f} flags imperfect '
                    f'model fit, which is common for bright sources with '
-                   f'complex scan angle coverage.  El-Badry+2024 notes '
+                   f'complex scan angle coverage.  The source is catalogued '
+                   f'as WDS J19124-5148A (primary of a visual pair), raising '
+                   f'the possibility that a resolved companion contaminates '
+                   f'the astrometry.  El-Badry+2024 notes '
                    f'that ~20% of Orbital solutions fail RV checks, '
                    f'so independent RV confirmation is essential.'),
     }
@@ -144,13 +152,16 @@ def test_chance_alignment():
         'test': 'Orbital coherence test',
         'significance': SIG,
         'period_days': P_ORBIT,
-        'verdict': 'STRONGLY DISFAVOURED',
+        'verdict': 'DISFAVOURED',
         'reason': (f'The orbital solution represents a coherent Keplerian '
                    f'signal at {SIG:.0f} sigma over {P_ORBIT:.0f} d.  At '
                    f'G = 6.47 (very bright), blending with a background '
                    f'source producing periodic astrometric perturbation is '
-                   f'extremely unlikely.  The high eccentricity '
-                   f'(e = {ECC:.3f}) is consistent with a genuine binary.'),
+                   f'unlikely.  The high eccentricity '
+                   f'(e = {ECC:.3f}) is consistent with a genuine binary.  '
+                   f'However, a quantitative crowding analysis using '
+                   f'Gaia scan-angle-resolved photometry has not been '
+                   f'performed.'),
     }
 
 
@@ -181,15 +192,17 @@ def main():
                  if t['verdict'] not in ('EXCLUDED',)]
     print(f'\n  Surviving (non-excluded): {", ".join(surviving)}')
 
-    conclusion = ('BH CANDIDATE: All standard non-BH scenarios are '
-                  'excluded or disfavoured.  The borderline mass '
+    conclusion = ('BH CANDIDATE: Two scenarios (WD, NS) are excluded on '
+                  'mass grounds; the remaining five are disfavoured but '
+                  'not formally excluded.  The borderline mass '
                   f'(M2 = {M2} Msun) places this object at the lower '
-                  f'edge of the stellar-mass BH range.  RV confirmation '
-                  f'is critical to validate the Orbital solution.')
+                  f'edge of the stellar-mass BH range.  The BH '
+                  f'interpretation stands or falls with M1; RV '
+                  f'confirmation is critical to validate the Orbital solution.')
 
     results = {
         'target': 'Gaia DR3 6656986282721029120',
-        'M2_true': M2,
+        'M2_derived': M2,
         'tests': tests,
         'counts': counts,
         'surviving_scenarios': surviving,

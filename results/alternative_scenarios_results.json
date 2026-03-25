@@ -1,16 +1,16 @@
 {
   "target": "Gaia DR3 6656986282721029120",
-  "M2_true": 5.509,
+  "M2_derived": 5.509,
   "tests": [
     {
       "scenario": "Main-sequence companion",
-      "test": "SED composite / blue excess test",
+      "test": "SED composite / blue excess test (blackbody)",
       "M2": 5.509,
       "expected_L_Lsun": 700,
       "expected_Teff": 16000,
       "flux_ratio_G_pct": 45,
-      "verdict": "EXCLUDED",
-      "reason": "A 5.509 Msun MS star would have L ~ 700 Lsun and Teff ~ 16000 K (mid-B type).  Against the K-giant primary (L ~ 600 Lsun), it would contribute ~45% of the G-band flux and dominate in the BP band.  The observed single-star SED with BP-RP = 1.77 (pure cool star) excludes a luminous hot companion."
+      "verdict": "DISFAVOURED",
+      "reason": "A 5.509 Msun MS star would have L ~ 700 Lsun and Teff ~ 16000 K (mid-B type).  Against the K-giant primary (L ~ 2400 Lsun), it would contribute ~30% of the G-band flux and dominate in the BP band.  The observed single-star SED with BP-RP = 1.77 disfavours a luminous hot companion, but the test uses blackbody models and saturated 2MASS photometry (quality DDD), so definitive exclusion requires a stellar-atmosphere fit."
     },
     {
       "scenario": "White dwarf",
@@ -28,15 +28,15 @@
       "M_tov": 2.3,
       "excess_factor": 2.4,
       "verdict": "EXCLUDED",
-      "reason": "M2 = 5.509 Msun exceeds the TOV limit (2.3 Msun) by a factor of 2.4.  Even the most generous NS EOS (M_max ~ 2.5 Msun) cannot accommodate this mass. Note: the posterior has a tail into the mass gap (3-5 Msun) due to M1 uncertainty, but the median remains above the NS ceiling."
+      "reason": "M2 = 5.509 Msun exceeds the TOV limit (2.3 Msun) by a factor of 2.4.  Even the most generous NS EOS (M_max ~ 2.5 Msun) cannot accommodate this mass. Note: the posterior has a tail into the mass gap (3-5 Msun) due to M1 uncertainty.  At the lowest plausible M1 (~ 3 Msun), the companion mass drops to ~ 3 Msun, making NS borderline."
     },
     {
       "scenario": "Hierarchical triple",
       "test": "Mardling-Aarseth stability + photometric",
       "P_inner_max_d": 19.6,
       "M2_split": 2.75,
-      "verdict": "EXCLUDED",
-      "reason": "Stability requires P_inner < 19.6 d.  Two ~ 2.8 Msun MS stars would have combined L ~ 130 Lsun (early A-type) \u2014 detectable in the SED.  If both are compact objects (WDs/NSs), each at ~ 2.8 Msun exceeds the Chandrasekhar limit.  A compact triple with two BHs is astrophysically contrived."
+      "verdict": "DISFAVOURED",
+      "reason": "Stability requires P_inner < 19.6 d.  Two ~ 2.8 Msun MS stars would have combined L ~ 130 Lsun (early A-type) \u2014 likely detectable in the SED, though our blackbody test is not definitive.  If both are compact objects (WDs/NSs), each at ~ 2.8 Msun exceeds the Chandrasekhar limit.  A compact triple with two BHs is astrophysically contrived but not formally excluded."
     },
     {
       "scenario": "Stripped helium star",
@@ -45,36 +45,37 @@
       "expected_Teff": "> 40000 K",
       "expected_L_Lsun": 5000,
       "verdict": "DISFAVOURED",
-      "reason": "A 5.509 Msun stripped He star at Teff > 40000 K would produce strong UV emission.  No GALEX detection is confirmed at this position.  The absence of X-ray emission in ROSAT is consistent with a quiescent BH but does not definitively exclude a hot subdwarf.  UV spectroscopy would close this channel."
+      "reason": "A 5.509 Msun stripped He star at Teff > 40000 K would produce strong UV emission.  A GALEX source (GALEX J191224.0-514820) exists at 0.9 arcsec offset, but magnitudes are unavailable and the association is uncertain.  The absence of X-ray emission in ROSAT is consistent with a quiescent BH but does not definitively exclude a hot subdwarf.  UV spectroscopy would close this channel."
     },
     {
       "scenario": "Astrometric artefact",
-      "test": "NSS solution quality metrics",
+      "test": "NSS solution quality metrics + visual double check",
       "significance": 27.98,
       "RUWE": 5.376,
       "EN_sig": 691.7,
       "GoF": 8.17,
       "verdict": "DISFAVOURED",
-      "reason": "The Orbital solution has significance 28.0 (5.6x the threshold of 5).  RUWE = 5.4 is moderately elevated, consistent with a binary.  EN_sig = 692 indicates coherent excess astrometric noise.  GoF = 8.17 flags imperfect model fit, which is common for bright sources with complex scan angle coverage.  El-Badry+2024 notes that ~20% of Orbital solutions fail RV checks, so independent RV confirmation is essential."
+      "reason": "The Orbital solution has significance 28.0 (5.6x the threshold of 5).  RUWE = 5.4 is moderately elevated, consistent with a binary.  EN_sig = 692 indicates coherent excess astrometric noise.  GoF = 8.17 flags imperfect model fit, which is common for bright sources with complex scan angle coverage.  The source is catalogued as WDS J19124-5148A (primary of a visual pair), raising the possibility that a resolved companion contaminates the astrometry.  El-Badry+2024 notes that ~20% of Orbital solutions fail RV checks, so independent RV confirmation is essential."
     },
     {
       "scenario": "Chance alignment",
       "test": "Orbital coherence test",
       "significance": 27.98,
       "period_days": 443.9,
-      "verdict": "STRONGLY DISFAVOURED",
-      "reason": "The orbital solution represents a coherent Keplerian signal at 28 sigma over 444 d.  At G = 6.47 (very bright), blending with a background source producing periodic astrometric perturbation is extremely unlikely.  The high eccentricity (e = 0.583) is consistent with a genuine binary."
+      "verdict": "DISFAVOURED",
+      "reason": "The orbital solution represents a coherent Keplerian signal at 28 sigma over 444 d.  At G = 6.47 (very bright), blending with a background source producing periodic astrometric perturbation is unlikely.  The high eccentricity (e = 0.583) is consistent with a genuine binary.  However, a quantitative crowding analysis using Gaia scan-angle-resolved photometry has not been performed."
     }
   ],
   "counts": {
-    "EXCLUDED": 4,
-    "DISFAVOURED": 2,
-    "STRONGLY DISFAVOURED": 1
+    "DISFAVOURED": 5,
+    "EXCLUDED": 2
   },
   "surviving_scenarios": [
+    "Main-sequence companion",
+    "Hierarchical triple",
     "Stripped helium star",
     "Astrometric artefact",
     "Chance alignment"
   ],
-  "conclusion": "BH CANDIDATE: All standard non-BH scenarios are excluded or disfavoured.  The borderline mass (M2 = 5.509 Msun) places this object at the lower edge of the stellar-mass BH range.  RV confirmation is critical to validate the Orbital solution."
+  "conclusion": "BH CANDIDATE: Two scenarios (WD, NS) are excluded on mass grounds; the remaining five are disfavoured but not formally excluded.  The borderline mass (M2 = 5.509 Msun) places this object at the lower edge of the stellar-mass BH range.  The BH interpretation stands or falls with M1; RV confirmation is critical to validate the Orbital solution."
 }

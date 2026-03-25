@@ -6,7 +6,6 @@ Gaia DR3 6656986282721029120 dormant black-hole paper.
 Figures produced:
   fig_system_overview.pdf — schematic of the binary system
   fig_cmd_hrd.pdf         — CMD + theoretical HRD placement
-  fig_checklist.pdf       — evidence bar chart
 """
 
 import json, os, sys
@@ -92,8 +91,8 @@ def fig_system_overview():
     ax.text(3.1, 2.6, f'P = {PERIOD:.1f} d\ne = {ECC:.3f}\n'
             f'a = {a_au:.1f} AU', fontsize=9, color='grey')
 
-    ax.set_title('Gaia DR3 6656986282721029120  \u2014  Binary System',
-                 fontsize=12, fontweight='bold', pad=12)
+    ax.set_title('HD 178734 (Gaia DR3 6656986282721029120)  \u2014  Binary System',
+                 fontsize=11, fontweight='bold', pad=12)
     fig.tight_layout()
     outpath = os.path.join(FIGDIR, 'fig_system_overview.pdf')
     fig.savefig(outpath, dpi=300)
@@ -211,7 +210,6 @@ def main():
     print('=== Generating publication figures ===\n')
     fig_system_overview()
     fig_cmd_hrd()
-    fig_checklist()
     print('\n=== Figure generation complete ===')
 
 
