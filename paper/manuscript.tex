@@ -66,7 +66,7 @@ supports a coherent photo-centre orbit.  A main-sequence star of
 the required mass would dominate the blue photometric bands; the
 observed single-star SED disfavours this scenario.  Of seven
 non-BH scenarios, two are firmly excluded on mass grounds (white
-dwarf, neutron star), one is excluded by the SED
+dwarf, neutron star), one is disfavoured by the SED
 (main-sequence companion), two are disfavoured pending follow-up
 (stripped helium star, hierarchical triple), and two remain open
 pending independent radial-velocity (RV) confirmation (astrometric
@@ -80,7 +80,7 @@ before this candidate can be classified as a bona fide black hole.
 \end{abstract}
 
 \begin{keywords}
-binaries: spectroscopic -- stars: black holes -- astrometry --
+binaries: astrometric -- stars: black holes -- astrometry --
 stars: individual: Gaia DR3 6656986282721029120
 \end{keywords}
 
@@ -199,7 +199,7 @@ value), but it should not be interpreted as a ``true'' mass
 independent of modelling assumptions
 (Section~\ref{sec:methods:nss}).
 
-\emph{Critically, the Gaia GSP-Phot pipeline did not produce
+\emph{Critically, the Gaia \mbox{GSP-Phot} pipeline did not produce
 atmospheric parameters ($T_{\rm eff}$, $\log g$) for this source.}
 This is not uncommon for luminous giants near the saturation limit
 of the Gaia photometric pipelines.  We therefore derive the
@@ -227,9 +227,11 @@ SIMBAD reports $V = 7.07$ from the Hipparcos input catalogue.
 The very red colour ($G_{\rm BP} - G_{\rm RP} = 1.77$) is
 consistent with a late-K giant.
 A GALEX source (GALEX\,J191224.0$-$514820) lies within
-$0.9\arcsec$; the source was observed (NUV and FUV bands,
-exposure 216\,s) but measured fluxes are not available in the
+$0.9\arcsec$ and was detected in the AIS survey
+(NUV and FUV bands, exposure 216\,s), but no calibrated
+magnitudes are available in the
 GUVcat\_AIS catalogue \citep{Bianchi2017}.
+This precludes a quantitative UV excess test.
 
 \subsection{X-ray archival data}
 \label{sec:data:xray}
@@ -331,7 +333,6 @@ $M_G \approx -3.3$
 ($L \approx 2400\,\Lsun$; Section~\ref{sec:results:stellar}),
 the star is a luminous giant or early asymptotic giant branch
 (AGB) star.
-asymptotic giant branch (AGB) star.
 
 The mass of such a star is inherently uncertain: a K3~III could
 range from $\sim$\,$2$--$3\,\Msun$ (old, low-metallicity) to
@@ -339,6 +340,10 @@ $\sim$\,$10$--$12\,\Msun$ (young, massive progenitor).  The Gaia
 \texttt{binary\_masses} table adopts $M_1 = 9.18\,\Msun$.  We
 treat this as the fiducial value but adopt a broad uncertainty of
 $\pm 3.0\,\Msun$ (log-normal prior) to reflect the ambiguity.
+\citet{Andrae2023} note that giant-star masses from broadband
+photometry alone carry systematic uncertainties of
+$\sim$\,$30$--$50$~per~cent, reinforcing the need for
+spectroscopic constraints.
 This uncertainty is the dominant contributor to the $M_2$ error
 budget.
 
@@ -479,13 +484,23 @@ analysis would be needed for a definitive exclusion.
 
 The Monte~Carlo posterior (Fig.~\ref{fig:posterior}) yields:
 \begin{itemize}
-\item Median companion mass: $\tilde{M}_2 = 5.3\,\Msun$
-\item 68~per~cent CI: $[4.3, 6.6]\,\Msun$
-\item 90~per~cent CI: $[3.8, 7.5]\,\Msun$
+\item Median companion mass: $\tilde{M}_2 = 5.33\,\Msun$
+\item 68~per~cent CI: $[4.34, 6.56]\,\Msun$
+\item 90~per~cent CI: $[3.80, 7.50]\,\Msun$
 \item $P(M_2 > 5\,\Msun) = 62$~per~cent
+  (marginalised over the $M_1$ prior)
 \item $P(M_2 > 3\,\Msun) = 99.7$~per~cent
 \item $P(3 < M_2/\Msun < 5) = 38$~per~cent (mass gap)
 \end{itemize}
+
+We note that the 62~per~cent BH probability is a
+\emph{marginalised} value that integrates over the full $M_1$
+prior ($9.18 \pm 3.0\,\Msun$).  At fixed
+$M_1 = 9.18\,\Msun$ (Table~\ref{tab:sensitivity}), the
+conditional probability rises to
+$P(M_2 > 5\,\Msun | M_1 = 9.18) = 81$~per~cent;
+the difference arises because the marginalised posterior includes
+draws with lower $M_1$ that pull $M_2$ below the threshold.
 
 The posterior is broad because of the large uncertainty in $M_1$.
 Crucially, higher $M_1$ produces higher $M_2$ (equation~\ref{eq:m2constraint}).
@@ -517,6 +532,23 @@ companion is consistent with a compact object (above the NS
 ceiling) for all $M_1 \geq 5\,\Msun$, but whether it is a
 mass-gap object or a conventional BH remains ambiguous at the
 current level of primary-star characterisation.
+
+\paragraph{Parallax sensitivity.}
+The main-catalogue parallax ($\varpi = 1.47$\,mas) and the NSS
+parallax ($\varpi_{\rm NSS} = 2.56$\,mas) differ by nearly a
+factor of two (Section~\ref{sec:data:gaia}).  If the NSS value
+were adopted, the implied distance drops to $d \approx 391$\,pc,
+reducing the absolute magnitude to $M_G \approx -2.1$ and the
+luminosity to $L \approx 800\,\Lsun$.  The primary would then be
+consistent with a lower-mass giant ($M_1 \sim 3$--$5\,\Msun$),
+and the companion mass would fall to $M_2 \approx 3$--$4\,\Msun$
+--- firmly in the mass gap rather than the BH regime.
+We retain the main-catalogue parallax as a conservative
+choice (this is the standard Gaia recommendation), but the
+discrepancy adds a qualitative systematic uncertainty
+that is not captured by the Monte~Carlo posterior.
+Resolving the parallax is essential: Gaia DR4 or an
+independent trigonometric measurement will settle this issue.
 
 % ====================================================================
 \section{Alternative Scenarios}
@@ -605,9 +637,12 @@ posterior) sits at the conventional boundary between the lower mass
 gap and the BH regime.  The observational mass gap
 ($\sim$\,$3$--$5\,\Msun$; \citealt{Bailyn1998, Ozel2010,
 Farr2011}) is a deficit between the heaviest neutron stars and the
-lightest confirmed BHs.  Whether this gap is real or an
-observational selection effect remains debated
-\citep{Jayasinghe2021, Thompson2019}.
+lightest confirmed BHs.  Whether this gap is a genuine feature
+of the compact-remnant mass function or an observational
+selection effect remains actively debated: recent gravitational-wave
+detections by LIGO/Virgo have begun to populate this region
+\citep{Jayasinghe2021, Thompson2019}, and the gap may
+narrow or close as detection methods improve.
 
 With $P(M_2 > 5\,\Msun) = 62$~per~cent and $P(3 < M_2/\Msun < 5)
 = 38$~per~cent, the posterior is genuinely ambiguous between the
@@ -695,7 +730,10 @@ Key caveats preventing confirmed compact-object classification:
   could contribute to the astrometric signal.
 \item \textbf{Parallax discrepancy.}  The main-catalogue parallax
   ($1.47$\,mas) and the NSS parallax ($2.56$\,mas) differ
-  significantly; this warrants investigation.
+  significantly.  If the NSS parallax is correct, the distance,
+  luminosity, primary mass, and companion mass all decrease
+  substantially (Section~\ref{sec:results:sensitivity}), placing
+  the companion in the mass gap rather than the BH regime.
 \item \textbf{Saturated photometry.}  The 2MASS bands are flagged
   as unreliable (quality ``D'') and the AllWISE $W1$/$W2$ errors
   are very large, limiting the SED analysis.
@@ -711,7 +749,8 @@ We have presented a comprehensive analysis of Gaia DR3
 \begin{enumerate}
 \item Under the Gaia NSS pipeline assumptions
   ($M_1 = 9.18\,\Msun$), the derived companion mass is
-  $M_2 = 5.3^{+1.2}_{-1.0}\,\Msun$, placing it at the
+  $M_2 = 5.3^{+1.2}_{-1.0}\,\Msun$ (marginalised posterior
+  median and 68~per~cent CI), placing it at the
   boundary of the mass gap and the BH regime.
 
 \item For all tested primary masses $M_1 \geq 5\,\Msun$, the
@@ -860,7 +899,7 @@ Scenario & Verdict & Key constraint \\
 \midrule
 MS companion    & Disfavoured  & SED colour inconsistent \\
 White dwarf     & Excluded     & $M_2 = 3.8\,M_{\rm Ch}$ \\
-Neutron star    & Excluded$^a$ & $M_2 = 2.4\,M_{\rm TOV}$ \\
+Neutron star    & Excluded$^a$ & $M_2 = 2.4\,M_{\rm TOV}$; borderline at low $M_1$ \\
 Triple system   & Disfavoured  & Stability + photometry \\
 Stripped He star & Disfavoured & UV data needed \\
 Artefact        & Disfavoured  & $28\sigma$ NSS; pending RV \\
@@ -876,7 +915,12 @@ Chance align.   & Disfavoured  & Keplerian orbit; pending RV \\
 \caption{Sensitivity of $M_2$ to the assumed primary mass.  Higher
 $M_1$ yields higher $M_2$.  The companion exceeds the NS ceiling
 ($2.3\,\Msun$) for all configurations, but the BH threshold
-($5\,\Msun$) is crossed only for $M_1 \gtrsim 9\,\Msun$.}
+($5\,\Msun$) is crossed only for $M_1 \gtrsim 9\,\Msun$.
+Probabilities in this table are \emph{conditional} on the stated
+fixed $M_1$ (with period and model-systematic scatter only);
+the full marginalised posterior (Table~\ref{tab:observed})
+gives $P(M_2 > 5\,\Msun) = 62$~per~cent when $M_1$ uncertainty
+is included.}
 \label{tab:sensitivity}
 \begin{tabular}{lcccc}
 \toprule
@@ -895,7 +939,9 @@ $M_1$ ($\Msun$) & $M_2$ median ($\Msun$) & $P(M_2 > 3\,\Msun)$ & $P(M_2 > 5\,\Ms
 \begin{table*}
 \centering
 \caption{Comparison with confirmed Gaia dormant BH systems and this
-candidate.}
+candidate.  Note that this source lacks independent RV
+confirmation and has a much less secure mass determination
+than the confirmed systems.}
 \label{tab:comparison}
 \begin{tabular}{lcccc}
 \toprule
